@@ -1,18 +1,33 @@
 import { FlatList, Text, View } from 'react-native';
+import { deleteOrder, getOrders } from '../../store/actions';
+import { useCallback, useEffect } from 'react';
+import{useDispatch, useSelector} from 'react-redux';
 
-import { ORDERS } from '../../constants/data/orders';
 import OrderItem from '../../components/order-item';
 import { styles } from './styles';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Orders = ({ navigation }) => {
-  const onDelete = (id) => {};
+  const dispatch=useDispatch();
+  const orders=useSelector((state) => state.orders.list);
+  const onDelete = (id) => {
+    dispatch(deleteOrder(id));
+    
+  };
+
+  useFocusEffect(
+    useCallback(()=>{
+    dispatch(getOrders());
+
+
+  },[dispatch]));
 
   const renderItem = ({ item }) => <OrderItem item={item} onDelete={onDelete} />;
   const keyExtractor = (item) => item.id.toString();
   return (
     <View style={styles.container}>
       <Text>Orders</Text>
-      <FlatList data={ORDERS} renderItem={renderItem} keyExtractor={keyExtractor} />
+      <FlatList  data={orders} renderItem={renderItem} keyExtractor={keyExtractor} />
     </View>
   );
 };
