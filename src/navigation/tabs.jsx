@@ -4,6 +4,7 @@ import OrdersNavigator from "./orders";
 import ShopNavigator from "./shop";
 import { colors } from "../constants/theme/colors";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import placesNavigator from "./places";
 import react from "react";
 import { useSelector } from "react-redux";
 
@@ -67,6 +68,23 @@ const TabNavigator=()=>{
                     fontFamily:'Raleway-Bold',
                     fontSize:14
                 }
+
+
+
+            }} 
+            />
+             <BottomTab.Screen 
+            name ="Places" 
+            component={placesNavigator}
+            options={{
+                tabBarIcon:({focused}) => (
+                    <Ionicons
+                        name="pin"
+                        size={22}
+                        color={colors.primary}
+                    />
+                ),
+                
 
 
 

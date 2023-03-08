@@ -4,6 +4,7 @@ import { signIn, signUp } from '../../store/actions/auth.action';
 import { colors } from '../../constants/theme/colors';
 import {styles} from './styles';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 const Auth=({navigation})=>{
@@ -14,12 +15,12 @@ const Auth=({navigation})=>{
     const title =isLogin ? 'Login' : 'Register';
     const message= isLogin ? 'Don\'t have an account?' : 'Already have an account';
     const messageButton= isLogin ? 'Login' : 'Register';
-
+    
 
 
     const onHandlerSubmit=() =>{
         dispatch(isLogin ? signIn(email,password): signUp(email,password))
-
+        
 
     }
     return(
